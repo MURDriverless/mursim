@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name" default="gotthard"/>
+    <arg name="car_config_file" default="$(find mursim_description)/cars/$(arg robot_name)/config/car.yaml"/>
+    <arg name="car_dimensions_file" default="$(find mursim_description)/cars/$(arg robot_name)/config/dimensions.yaml"/>
+    <arg name="x_spawn" default="0"/>
+    <arg name="y_spawn" default="0"/>
+    <arg name="z_spawn" default="0"/>
+
+    <param name="robot_description"
+	command="$(find xacro)/xacro --inorder '$(find mursim_description)/cars/$(arg robot_name)/urdf/vehicle.xacro'"/>
+
+    <node name="spawn_urdf"
+	  pkg="gazebo_ros"
+	  type="spawn_model"
+	  args="-param robot_description -urdf -model $(arg robot_name) -x $(arg x_spawn) -y $(arg y_spawn) -z $(arg z_spawn)"/>
+</launch>
+

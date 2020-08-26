@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot name="gotthard" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- STEERING -->
+
+    <transmission name="left_steering">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="left_steering_hinge_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="left_steering_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+    </transmission>
+
+    <transmission name="right_steering">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="right_steering_hinge_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="right_steering_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <mechanicalReduction>1</mechanicalReduction>
+	</actuator>
+    </transmission>
+
+    <!-- DRIVE -->
+
+    <transmission name="front_left_drive">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="front_left_wheel_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="front_left_drive_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</actuator>
+    </transmission>
+
+    <transmission name="front_right_drive">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="front_right_wheel_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="front_right_drive_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</actuator>
+    </transmission>
+
+    <transmission name="rear_left_drive">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="rear_left_wheel_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="rear_left_drive_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</actuator>
+    </transmission>
+
+    <transmission name="rear_right_drive">
+	<type>transmission_interface/SimpleTransmission</type>
+	<joint name="rear_right_wheel_joint">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</joint>
+	<actuator name="rear_right_drive_actuator">
+	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	</actuator>
+    </transmission>
+
+    <gazebo>
+	<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+	    <robotNamespace>/gotthard/steer_drive_controller</robotNamespace>
+	</plugin>
+    </gazebo>
+
+</robot>
