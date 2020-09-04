@@ -3,15 +3,17 @@ steer_drive_controller:
         type: joint_state_controller/JointStateController
         publish_rate: 50
 
-    left_steering_hinge_controller:
-        type: effort_controllers/JointPositionController
-        joint: left_steering_hinge_joint
-        pid: {p: 100.0, i: 0.01, d: 10.0}
+    gazebo_ros_control:
+        pid_gains:
+            left_steering_hinge_joint: {p: 100.0, i: 0.01, d: 10.0}
+            right_steering_hinge_joint: {p: 100.0, i: 0.01, d: 10.0}
 
-    right_steering_hinge_controller:
-        type: effort_controllers/JointPositionController
-        joint: right_steering_hinge_joint
-        pid: {p: 100.0, i: 0.01, d: 10.0}
+    steering_position_controller:
+        type: position_controllers/JointGroupPositionController
+        joints:
+            - left_steering_hinge_joint
+            - right_steering_hinge_joint
+
 
     front_left_drive_controller:
         type: effort_controllers/JointPositionController

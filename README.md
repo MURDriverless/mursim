@@ -1,1 +1,3 @@
-# mursim
+# MURSim
+## How to Launch
+    

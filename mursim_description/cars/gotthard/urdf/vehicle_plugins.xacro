@@ -6,10 +6,10 @@
     <transmission name="left_steering">
 	<type>transmission_interface/SimpleTransmission</type>
 	<joint name="left_steering_hinge_joint">
-	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
 	</joint>
 	<actuator name="left_steering_actuator">
-	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
 	    <mechanicalReduction>1</mechanicalReduction>
 	</actuator>
     </transmission>
@@ -17,10 +17,10 @@
     <transmission name="right_steering">
 	<type>transmission_interface/SimpleTransmission</type>
 	<joint name="right_steering_hinge_joint">
-	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
 	</joint>
 	<actuator name="right_steering_actuator">
-	    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+	    <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
 	    <mechanicalReduction>1</mechanicalReduction>
 	</actuator>
     </transmission>
