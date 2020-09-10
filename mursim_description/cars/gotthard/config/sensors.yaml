@@ -7,8 +7,6 @@ stream_track:
 
 sensors:
   lidar:
-    # enabled: true
-    # topic: os1_cloud_node/points
     pos:
       x: 0.95
       y: 0.0

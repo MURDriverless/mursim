@@ -1,8 +1,7 @@
 # MURSim
 
-## Getting Started
 
-## Getting ROS
+## Prerequisities
 
 The following link details the process of installing ROS and Gazebo on your computer:
 
@@ -10,7 +9,14 @@ The following link details the process of installing ROS and Gazebo on your comp
 
 For this repository, Ubuntu 18.04, ROS Melodic and an internet connection is required.
 
+Install package for effor controller.
+
+```
+sudo apt install ros-melodic-effort-controllers
+```
+
 ## Downloading and Running
+
 
 1. Create a workspace
 
@@ -55,7 +61,7 @@ git clone https://github.com/tu-darmstadt-ros-pkg/hector_gazebo
 Assuming you have `catkin tools`, build the packages.
 ```
 catkin build
-source deve/setup.bash
+source devel/setup.bash
 ```
 
 Certain key options of the sensor suite can be updated with the following `yaml` file.
@@ -77,6 +83,13 @@ src/mursim/mursim_description/cars/gotthard/urdf/vehicle_sensors.xacro
 
 # sensor links and joints
 src/mursim/mursim_description/cars/gotthard/urdf/vehicle_sensors_links.xacro
+```
+
+### LiDAR Pipeline Simulation
+
+See [this particular lidar_dev branch](https://github.com/MURDriverless/lidar_dev/tree/task-262-lidar-sim) for more details. For best performance, set the cmake argument as follows before calling `catkin build`.
+```
+catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
 ## Notes
