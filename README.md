@@ -87,7 +87,7 @@ src/mursim/mursim_description/cars/gotthard/urdf/vehicle_sensors_links.xacro
 
 ### LiDAR Pipeline Simulation
 
-See [this particular lidar_dev branch](https://github.com/MURDriverless/lidar_dev/tree/task-262-lidar-sim) for more details. For best performance, set the cmake argument as follows before calling `catkin build`.
+Use [this particular lidar_dev branch](https://github.com/MURDriverless/lidar_dev/tree/task-262-lidar-sim). For best performance, set the cmake argument as follows before calling `catkin build`.
 ```
 catkin config --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
