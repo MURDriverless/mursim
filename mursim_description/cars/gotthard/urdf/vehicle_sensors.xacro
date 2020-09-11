@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<robot name="gotthard" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="gotthard"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-	<xacro:include filename="$(find mursim_description)/cars/gotthard/urdf/vehicle_sensors_links.xacro"/>
+    <xacro:include filename="$(find mursim_description)/cars/gotthard/urdf/vehicle_sensors_links.xacro"/>
 
-    <xacro:property name="sensors" value="${sensors['sensors']}"/>
+    <xacro:property name="sensors" value="${robot_sensors['sensors']}"/>
 
     <xacro:macro name="lidar_pipeline">
         <!-- Sensor links and fixed joints -->
@@ -16,34 +17,93 @@
         <joint name="front_center_lidar_joint" type="fixed">
             <parent link="chassis"/>
             <child link="front_center_lidar_link"/>
-            <origin xyz="${sensors['lidar']['pos']['x']} 0.0 0.15" rpy="0 0 0"/>
+            <origin xyz="${sensors['lidar']['pos']['x']} 0.0 ${sensors['lidar']['pos']['z']}" rpy="0 0 0"/>
         </joint>
 
-        <gazebo>
+        <!-- <gazebo>
             <plugin name="lidar_pipeline" filename="libgazebo_cone_sensor.so">
                 <yaml_config>$(arg sensors_config_file)</yaml_config>
                 <base_link>/mursim/vehicle/base_link</base_link>
                 <node_name>${sensors['lidar_pipeline']['node_name']}</node_name>
             </plugin>
-        </gazebo>
+        </gazebo> -->
     </xacro:macro>
 
     <xacro:macro name="camera_pipeline">
-        <gazebo>
+        <!-- <gazebo>
             <plugin name="camera_pipeline" filename="libgazebo_cone_sensor.so">
                 <yaml_config>$(arg sensors_config_file)</yaml_config>
                 <base_link>/mursim/vehicle/base_link</base_link>
                 <node_name>${sensors['camera_pipeline']['node_name']}</node_name>
             </plugin>
-        </gazebo>
+        </gazebo> -->
     </xacro:macro>
 
     <xacro:macro name="stereo_pipeline">
-        <gazebo>
-            <plugin name="stereo_pipeline" filename="libgazebo_cone_sensor.so">
-                <yaml_config>$(arg sensors_config_file)</yaml_config>
-                <node_name>${sensors['stereo_pipeline']['node_name']}</node_name>
-            </plugin>
+
+        <!-- Stereo Camera -->
+        <gazebo reference="left_camera_frame">
+
+            <material>Gazebo/Orange</material>
+
+            <sensor type="multicamera" name="stereo_camera">
+                <update_rate>${sensors['stereo_pipeline']['rate']}</update_rate>
+
+                <camera name="left">
+                    <horizontal_fov>1.13</horizontal_fov>
+                    <image>
+                        <width>1920</width>
+                        <height>1200</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.02</near>
+                        <far>300</far>
+                    </clip>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+
+                <camera name="right">
+                    <pose>0 -${sensors['stereo_pipeline']['camera_baseline']} 0 0 0 0</pose>
+                    <horizontal_fov>1.13</horizontal_fov>
+                    <image>
+                        <width>1920</width>
+                        <height>1200</height>
+                        <format>R8G8B8</format>
+                    </image>
+                    <clip>
+                        <near>0.02</near>
+                        <far>300</far>
+                    </clip>
+                    <noise>
+                        <type>gaussian</type>
+                        <mean>0.0</mean>
+                        <stddev>0.007</stddev>
+                    </noise>
+                </camera>
+
+                <plugin name="stereo_camera_controller" filename="libgazebo_ros_multicamera.so">
+                    <alwaysOn>true</alwaysOn>
+                    <updateRate>0.0</updateRate>
+                    <cameraName>${sensors['stereo_pipeline']['camera_name']}</cameraName>
+                    <imageTopicName>${sensors['stereo_pipeline']['image_topic_name']}</imageTopicName>
+                    <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+
+                    <frameName>left_camera_optical_frame</frameName>
+                    <!--<rightFrameName>right_camera_optical_frame</rightFrameName>-->
+                    <hackBaseline>${sensors['stereo_pipeline']['camera_baseline']}</hackBaseline>
+                    <distortionK1>0.0</distortionK1>
+                    <distortionK2>0.0</distortionK2>
+                    <distortionK3>0.0</distortionK3>
+                    <distortionT1>0.0</distortionT1>
+                    <distortionT2>0.0</distortionT2>
+                    <!-- <visualize>true</visualize> -->
+                </plugin>
+            </sensor>
         </gazebo>
     </xacro:macro>
 </robot>
