@@ -9,10 +9,11 @@ The following link details the process of installing ROS and Gazebo on your comp
 
 For this repository, Ubuntu 18.04, ROS Melodic and an internet connection is required.
 
-Install package for effor controller.
+Install package for effort controller and position controllers
 
 ```
 sudo apt install ros-melodic-effort-controllers
+sudo apt install ros-melodic-position-controllers
 ```
 
 ## Downloading and Running
