@@ -13,7 +13,7 @@ sensors:
       z: 0.15
 
   lidar_pipeline:
-    enabled: false
+    enabled: true 
 
   stereo_pipeline:
     enabled: false

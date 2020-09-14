@@ -16,22 +16,22 @@ steer_drive_controller:
 
 
     front_left_drive_controller:
-        type: effort_controllers/JointPositionController
+        type: effort_controllers/JointEffortController
         joint: front_left_wheel_joint 
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
     front_right_drive_controller:
-        type: effort_controllers/JointPositionController
+        type: effort_controllers/JointEffortController
         joint: front_right_wheel_joint
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
     rear_left_drive_controller:
-        type: effort_controllers/JointPositionController
+        type: effort_controllers/JointEffortController
         joint: rear_left_wheel_joint
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
     rear_right_drive_controller:
-        type: effort_controllers/JointPositionController
+        type: effort_controllers/JointEffortController
         joint: rear_right_wheel_joint
         pid: {p: 100.0, i: 0.01, d: 10.0}
 
