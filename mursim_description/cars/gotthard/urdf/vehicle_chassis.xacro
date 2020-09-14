@@ -39,15 +39,11 @@
             </collision>
             <visual>
                 <xacro:chassis_geometry/>
-                <material name="blue"/>
             </visual>
             <inertial>
                 <xacro:chassis_inertial_params/>
             </inertial>
         </link>
-	<gazebo reference="chassis">
-	    <material>Gazebo/Blue</material>
-	</gazebo>
     </xacro:macro>
 
     <xacro:macro name="body_left_rear_wheel">
