@@ -50,7 +50,7 @@
 <!-- geometry macros -->
 <xacro:macro name="chassis_geometry">
   <geometry>
-    <mesh filename="package://mursim_description/cars/gotthard/mesh/chassis.stl" scale = "0.001 0.001 0.001" />
+    <mesh filename="package://mursim_description/cars/gotthard/mesh/chassis.dae" scale = "1 1 1" />
   </geometry>
 </xacro:macro>
 
