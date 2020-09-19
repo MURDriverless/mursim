@@ -45,7 +45,7 @@ sudo apt install ros-melodic-position-controllers
     ```
 
 ## Changing Tracks
-The track for Formula SAE (US) Lincoln 2014 endurance was added for testing, to swap back to the old track commented out
+The track for Formula SAE (US) Lincoln 2014 endurance was added for testing, to enable this, remove the comment braces around the following lines
 ```
 <arg name="map"     value="large_track"/>
 <arg name="x_spawn" value="16"/>
