@@ -44,15 +44,6 @@ sudo apt install ros-melodic-position-controllers
     roslaunch mursim_gazebo spawn_world.launch
     ```
 
-## Changing Tracks
-The track for Formula SAE (US) Lincoln 2014 endurance was added for testing, to enable this, remove the comment braces around the following lines
-```
-<arg name="map"     value="large_track"/>
-<arg name="x_spawn" value="16"/>
-<arg name="y_spawn" value="32.25"/>
-```
-in `mursim_gazebo/launch/slow_lap.launch`
-
 ## Vehicle Sensors Packages
 The following packages are required to simulate the perception and spatial sensors.
 Clone these into your `catkin_ws/src` folder.
