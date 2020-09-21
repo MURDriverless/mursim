@@ -16,7 +16,7 @@ sensors:
     enabled: true 
 
   stereo_pipeline:
-    enabled: false
+    enabled: true
     camera_name: stereo_cam               # Camera name
     image_topic_name: image_raw           # Image topic name
 
@@ -25,7 +25,7 @@ sensors:
     camera_size: 0.05                     # Size of camera [m]
     camera_mass: 0.1                      # Mass of camera [kg]
     camera_height: 0.5                    # Height of camera [m]
-    camera_baseline: 0.15                 # Baseline of stereo camera [m]
+    camera_baseline: 1.5                  # Currently hardcoded in .xacro
 
   gps:
     topic_name: /piksi/gps

@@ -50,7 +50,8 @@
                 <update_rate>${sensors['stereo_pipeline']['rate']}</update_rate>
 
                 <camera name="left">
-                    <horizontal_fov>1.13</horizontal_fov>
+                    <pose>0 0.1 0 0 0 0</pose>
+                    <horizontal_fov>1</horizontal_fov>
                     <image>
                         <width>1920</width>
                         <height>1200</height>
@@ -68,8 +69,8 @@
                 </camera>
 
                 <camera name="right">
-                    <pose>0 -${sensors['stereo_pipeline']['camera_baseline']} 0 0 0 0</pose>
-                    <horizontal_fov>1.13</horizontal_fov>
+                    <pose>0 -0.1 0 0 0 0</pose>
+                    <horizontal_fov>1</horizontal_fov>
                     <image>
                         <width>1920</width>
                         <height>1200</height>

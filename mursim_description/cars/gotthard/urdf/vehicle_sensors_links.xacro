@@ -69,7 +69,7 @@
     </link>
   </xacro:macro>
 
-  <xacro:property name="camera_link" value="-1"/>
+  <xacro:property name="camera_link" value="-0.9"/>
   <xacro:property name="camera_link_x" value="0.1"/>
 
   <!-- offset to the left of the vehicle -->
