@@ -15,9 +15,6 @@
       <profile_COMMON>
         <technique sid="common">
           <phong>
-            <emission>
-              <color sid="emission">0 0 0 1</color>
-            </emission>
             <diffuse>
               <color sid="diffuse">1 0.06878168 0 1</color>
             </diffuse>
@@ -35,9 +32,6 @@
       <profile_COMMON>
         <technique sid="common">
           <phong>
-            <emission>
-              <color sid="emission">0.9646862 0.9646862 0.9559734 1</color>
-            </emission>
             <diffuse>
               <color sid="diffuse">0.964706 0.964706 0.952941 1</color>
             </diffuse>
