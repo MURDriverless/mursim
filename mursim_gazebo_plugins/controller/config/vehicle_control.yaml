@@ -5,8 +5,8 @@ steer_drive_controller:
 
     gazebo_ros_control:
         pid_gains:
-            left_steering_hinge_joint: {p: 10.0, i: 0.001, d: 10.0}
-            right_steering_hinge_joint: {p: 10.0, i: 0.001, d: 10.0}
+            left_steering_hinge_joint: {p: 1.00, i: 0.1, d: 1.0}
+            right_steering_hinge_joint: {p: 1.00, i: 0.1, d: 1.0}
             front_left_wheel_joint: {p: 100.0, i: 0.01, d: 10.0}
             front_right_wheel_joint: {p: 100.0, i: 0.01, d: 10.0}
             rear_left_wheel_joint: {p: 100.0, i: 0.01, d: 10.0}

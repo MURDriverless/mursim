@@ -8,11 +8,11 @@
 	<include file="$(find slam)/launch/slam.launch"/>
 
 	<!--################# Control Pipeline ###################-->
-	<include file="$(find planner_exploratory)/launch/planner.launch"/> 
+	<!--<include file="$(find planner_exploratory)/launch/planner.launch"/> -->
 	<!--<include file="$(find path_follower_ros)/launch/follower.launch"/>-->
 
 	<!--################# Actuation Pipeline ###################-->
-	<!--<include file="$(find mursim_actuator)/launch/actuator.launch"/>-->
+	<include file="$(find mursim_actuator)/launch/actuator.launch"/>
 
 	<!--################# RVIZ ###################-->
 	<node type="rviz" name="rviz" pkg="rviz" args="-d $(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/>
