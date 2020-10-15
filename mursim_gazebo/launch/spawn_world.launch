@@ -4,6 +4,7 @@
 
     <arg name="robot_name" default="gotthard"/>
     <arg name="map" default="eufs_track"/>
+    <arg name="gui" default="false"/>
     <arg name="x_spawn" default="-13.0"/>
     <arg name="y_spawn" default="10.3"/>
     <arg name="z_spawn" default="0.1"/>
@@ -12,6 +13,7 @@
     <!-- World -->
     <include file="$(find mursim_gazebo)/launch/empty_world.launch">
         <arg name="world_name" value="$(find mursim_gazebo)/worlds/$(arg map).world"/>
+        <arg name="gui" default="$(arg gui)"/>
         <arg name="verbose" value="$(arg verbose)"/>
     </include>
 
@@ -21,7 +23,6 @@
         <arg name="y_spawn" value="$(arg y_spawn)"/>
         <arg name="z_spawn" value="$(arg z_spawn)"/>
     </include>
-
 
     <!-- Controller Plugin -->
     <include file="$(find mursim_gazebo_plugins)/controller/launch/vehicle_control.launch">
