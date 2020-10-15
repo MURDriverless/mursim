@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="node_start_delay" default="3.0"/>
+
+	<!--################# Perception Pipeline ###################-->
+	<include file="$(find lidar_dev)/launch/cluster_pipeline.launch"/>
+	<include file="$(find slam)/launch/slam.launch"/>
+
+	<!--################# Control Pipeline ###################-->
+	<include file="$(find planner_exploratory)/launch/planner.launch"/> 
+	<include file="$(find path_follower_ros)/launch/follower.launch"/>
+
+	<!--################# Actuation Pipeline ###################-->
+	<include file="$(find mursim_actuator)/launch/actuator.launch"/>	
+
+</launch>
