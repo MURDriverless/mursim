@@ -5,12 +5,39 @@
       <author>Blender User</author>
       <authoring_tool>Blender 2.90.0 commit date:2020-08-31, commit time:11:26, hash:0330d1af29c0</authoring_tool>
     </contributor>
-    <created>2020-09-14T15:48:51</created>
-    <modified>2020-09-14T15:48:51</modified>
+    <created>2020-09-14T20:14:23</created>
+    <modified>2020-09-14T20:14:23</modified>
     <unit name="meter" meter="1"/>
     <up_axis>Z_UP</up_axis>
   </asset>
   <library_effects>
+    <effect id="the-university-of-melbourne-logo-png-transparent-1024x1024-effect">
+      <profile_COMMON>
+        <newparam sid="the-university-of-melbourne-logo-png-transparent-1024x1024_png-surface">
+          <surface type="2D">
+            <init_from>the-university-of-melbourne-logo-png-transparent-1024x1024_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="the-university-of-melbourne-logo-png-transparent-1024x1024_png-sampler">
+          <sampler2D>
+            <source>the-university-of-melbourne-logo-png-transparent-1024x1024_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="the-university-of-melbourne-logo-png-transparent-1024x1024_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.45</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
     <effect id="Steel-effect">
       <profile_COMMON>
         <technique sid="common">
@@ -153,8 +180,14 @@
     <image id="rr" name="rr">
       <init_from>rr.png</init_from>
     </image>
+    <image id="the-university-of-melbourne-logo-png-transparent-1024x1024_png" name="the-university-of-melbourne-logo-png-transparent-1024x1024_png">
+      <init_from>the-university-of-melbourne-logo-png-transparent-1024x1024.png</init_from>
+    </image>
   </library_images>
   <library_materials>
+    <material id="the-university-of-melbourne-logo-png-transparent-1024x1024-material" name="the-university-of-melbourne-logo-png-transparent-1024x1024">
+      <instance_effect url="#the-university-of-melbourne-logo-png-transparent-1024x1024-effect"/>
+    </material>
     <material id="Steel-material" name="Steel">
       <instance_effect url="#Steel-effect"/>
     </material>
@@ -172,6 +205,48 @@
     </material>
   </library_materials>
   <library_geometries>
+    <geometry id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh" name="the-university-of-melbourne-logo-png-transparent-1024x1024">
+      <mesh>
+        <source id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-positions">
+          <float_array id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-positions-array" count="75">-0.5158114 -0.1020169 -1.278282 0.5151687 -0.1025085 -1.278469 -0.5159491 0.8101146 -0.9938245 0.5187785 0.8102317 -0.9937275 -0.5182738 0.5821943 -1.06489 -0.5194512 0.3544364 -1.135931 -0.5146639 0.1263012 -1.207171 -0.2458982 -0.1042232 -1.28037 -0.001821458 -0.1066131 -1.279365 0.2494715 -0.1026821 -1.279972 0.5173753 0.1264047 -1.207061 0.5163487 0.3542519 -1.136025 0.5153918 0.5821729 -1.064962 0.2572823 0.8098378 -0.9968419 -0.002022743 0.8070059 -0.99844 -0.258739 0.8096738 -0.9968603 -0.2458144 0.1250662 -1.209263 -0.2487965 0.3525772 -1.138709 -0.2508528 0.5813875 -1.067779 -0.001871943 0.1217913 -1.209134 -0.001922309 0.3501964 -1.138902 -0.001972556 0.5786009 -1.068671 0.2496905 0.1248188 -1.209465 0.253634 0.3536353 -1.13847 0.2535549 0.5810957 -1.067907</float_array>
+          <technique_common>
+            <accessor source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-positions-array" count="25" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-normals">
+          <float_array id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-normals-array" count="96">-0.009521961 -0.2965337 0.954975 0.01075613 -0.2977495 0.9545834 0.00279504 -0.2965812 0.9550036 9.76155e-6 -0.2939053 0.9558346 0.006064295 -0.2973887 0.9547373 0.007750153 -0.2979177 0.9545602 0.009412288 -0.2977961 0.9545832 -0.004482984 -0.2961993 0.9551157 -0.002106547 -0.2962233 0.9551164 1.09296e-4 -0.2960925 0.9551593 0.006907343 -0.2938973 0.955812 0.004795968 -0.2939009 0.9558239 0.002335667 -0.2939044 0.955832 -0.005211293 -0.2960203 0.9551674 -0.006822645 -0.2962214 0.955095 -0.008191585 -0.2962835 0.955065 -0.01091939 -0.2979792 0.95451 0.009421885 -0.2963604 0.9550297 1.36303e-4 -0.2939051 0.9558347 -0.002645611 -0.2966483 0.9549832 0.004970014 -0.2962018 0.9551125 0.006072521 -0.2961208 0.9551313 0.007768571 -0.2960208 0.95515 -0.006816267 -0.2939003 0.9558119 -0.004453003 -0.2939032 0.9558249 -0.002083361 -0.2939054 0.9558323 0.004820287 -0.2960298 0.9551666 0.002370774 -0.2963721 0.9550696 3.56429e-5 -0.2962908 0.9550979 -0.006809592 -0.2977225 0.9546282 -0.008183836 -0.2976635 0.9546358 -0.009512484 -0.2976804 0.9546182</float_array>
+          <technique_common>
+            <accessor source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-normals-array" count="32" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-map-0">
+          <float_array id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-map-0-array" count="192">1 0.75 0.75 1 0.75 0.75 0 0.75 0.25 1 0 1 0.25 0.75 0.5 1 0.25 1 0.75 0.75 0.5 1 0.5 0.75 0 0 0.25 0.25 0 0.25 0 0.25 0.25 0.5 0 0.5 0 0.5 0.25 0.75 0 0.75 0.25 0 0.5 0.25 0.25 0.25 0.25 0.25 0.5 0.5 0.25 0.5 0.25 0.5 0.5 0.75 0.25 0.75 0.75 0 0.5 0.25 0.5 0 0.75 0.25 0.5 0.5 0.5 0.25 0.75 0.5 0.5 0.75 0.5 0.5 1 0 0.75 0.25 0.75 0 1 0.25 0.75 0.5 0.75 0.25 1 0.5 0.75 0.75 0.75 0.5 1 0.75 1 1 0.75 1 0 0.75 0.25 0.75 0.25 1 0.25 0.75 0.5 0.75 0.5 1 0.75 0.75 0.75 1 0.5 1 0 0 0.25 0 0.25 0.25 0 0.25 0.25 0.25 0.25 0.5 0 0.5 0.25 0.5 0.25 0.75 0.25 0 0.5 0 0.5 0.25 0.25 0.25 0.5 0.25 0.5 0.5 0.25 0.5 0.5 0.5 0.5 0.75 0.75 0 0.75 0.25 0.5 0.25 0.75 0.25 0.75 0.5 0.5 0.5 0.75 0.5 0.75 0.75 0.5 0.75 1 0 1 0.25 0.75 0.25 1 0.25 1 0.5 0.75 0.5 1 0.5 1 0.75 0.75 0.75</float_array>
+          <technique_common>
+            <accessor source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-map-0-array" count="96" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-vertices">
+          <input semantic="POSITION" source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-positions"/>
+        </vertices>
+        <triangles material="the-university-of-melbourne-logo-png-transparent-1024x1024-material" count="32">
+          <input semantic="VERTEX" source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh-map-0" offset="2" set="0"/>
+          <p>12 0 0 13 0 1 24 0 2 4 1 3 15 1 4 2 1 5 18 2 6 14 2 7 15 2 8 24 3 9 14 3 10 21 3 11 0 4 12 16 4 13 6 4 14 6 5 15 17 5 16 5 5 17 5 6 18 18 6 19 4 6 20 7 7 21 19 7 22 16 7 23 16 8 24 20 8 25 17 8 26 17 9 27 21 9 28 18 9 29 9 10 30 19 10 31 8 10 32 22 11 33 20 11 34 19 11 35 23 12 36 21 12 37 20 12 38 1 13 39 22 13 40 9 13 41 10 14 42 23 14 43 22 14 44 11 15 45 24 15 46 23 15 47 12 16 48 3 16 49 13 16 50 4 17 51 18 17 52 15 17 53 18 18 54 21 18 55 14 18 56 24 19 57 13 19 58 14 19 59 0 20 60 7 20 61 16 20 62 6 21 63 16 21 64 17 21 65 5 22 66 17 22 67 18 22 68 7 23 69 8 23 70 19 23 71 16 24 72 19 24 73 20 24 74 17 25 75 20 25 76 21 25 77 9 26 78 22 26 79 19 26 80 22 27 81 23 27 82 20 27 83 23 28 84 24 28 85 21 28 86 1 29 87 10 29 88 22 29 89 10 30 90 11 30 91 23 30 92 11 31 93 12 31 94 24 31 95</p>
+        </triangles>
+      </mesh>
+    </geometry>
     <geometry id="MUR20-2805_v6_007-mesh" name="MUR20-2805 v6.007">
       <mesh>
         <source id="MUR20-2805_v6_007-mesh-positions">
@@ -511,6 +586,18 @@
   </library_geometries>
   <library_visual_scenes>
     <visual_scene id="Scene" name="Scene">
+      <node id="the-university-of-melbourne-logo-png-transparent-1024x1024" name="the-university-of-melbourne-logo-png-transparent-1024x1024" type="NODE">
+        <matrix sid="transform">-7.68203e-9 -0.1757443 0 0.8414065 0.1757443 -7.68203e-9 0 0 0 0 0.1757443 0.5777656 0 0 0 1</matrix>
+        <instance_geometry url="#the-university-of-melbourne-logo-png-transparent-1024x1024-mesh" name="the-university-of-melbourne-logo-png-transparent-1024x1024">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="the-university-of-melbourne-logo-png-transparent-1024x1024-material" target="#the-university-of-melbourne-logo-png-transparent-1024x1024-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
       <node id="MUR20-2805_v6_007" name="MUR20-2805 v6.007" type="NODE">
         <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
         <instance_geometry url="#MUR20-2805_v6_007-mesh" name="MUR20-2805 v6.007">
