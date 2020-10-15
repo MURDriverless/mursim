@@ -6,14 +6,16 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /MarkerArray1
         - /MarkerArray2
         - /Odometry1
         - /Odometry1/Covariance1
         - /Odometry1/Covariance1/Position1
         - /Path1
-        - /Path1/Status1
-      Splitter Ratio: 0.5
+
+    Splitter Ratio: 0.5
     Tree Height: 1019
+
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -227,3 +229,4 @@ Window Geometry:
   Width: 1811
   X: 308
   Y: 221
+

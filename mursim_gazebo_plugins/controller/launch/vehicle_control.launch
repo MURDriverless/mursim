@@ -16,10 +16,8 @@
     </node>
 
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-	output="screen" ns="$(arg robot_name)/steer_drive_controller" args="joint_state_controller 
-	steering_position_controller
-	front_left_drive_controller
-	front_right_drive_controller
-	rear_left_drive_controller
-	rear_right_drive_controller"/>
+	output="screen" ns="$(arg robot_name)/steer_drive_controller" 
+	args="joint_state_controller 
+		  steering_position_controller
+		  wheel_drive_controller"/>
 </launch>
