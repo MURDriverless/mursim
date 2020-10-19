@@ -4,13 +4,16 @@
 
 	<!--################# Perception Pipeline ###################-->
 	<include file="$(find mursim_gazebo)/launch/spawn_world.launch">
+		<arg name="map"     value="uneven_track"/>
+		<arg name="verbose"	value="true"/>
+
         <!-- <arg name="map"     value="large_track"/>
         <arg name="x_spawn" value="16"/>
         <arg name="y_spawn" value="32.25"/> -->
     </include>
 
 	<include file="$(find lidar_dev)/launch/cluster_pipeline.launch"/>
-	<include file="$(find slam)/launch/slam.launch"/>
+	<!-- <include file="$(find slam)/launch/slam.launch"/> -->
 
 	<!--################# Control Pipeline ###################-->
 	<!-- <include file="$(find planner_exploratory)/launch/planner.launch"/>  -->
