@@ -7,7 +7,7 @@
       <collision name="uneven_terrain_collision">
         <geometry>
           <mesh>
-            <uri>model://meshes/uneven_terrain_2.dae</uri>
+            <uri>model://meshes/uneven_terrain_3.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -15,7 +15,7 @@
       <visual name="uneven_terrain_visual">
         <geometry>
           <mesh>
-            <uri>model://meshes/uneven_terrain_2.dae</uri>
+            <uri>model://meshes/uneven_terrain_3.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>

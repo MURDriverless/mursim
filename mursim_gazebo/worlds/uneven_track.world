@@ -39,7 +39,7 @@
     <!-- add uneven plane -->
     <include>
       <uri>model://uneven_plane</uri>
-      <pose>0.0 0.0 -0.5 0 0 0</pose>
+      <pose>0.0 0.0 0.3 0 0 0</pose>
     </include>
 
     <!-- <include>
@@ -49,7 +49,7 @@
 
     <include>
       <uri>model://small_track</uri>
-      <pose>0.0 0.0 0.5 0 0 0</pose>
+      <pose>0.0 0.0 1.0 0 0 0</pose>
     </include>
 
   </world>
