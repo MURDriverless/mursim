@@ -4,6 +4,9 @@
 
     <arg name="robot_name" default="19E"/>
     <arg name="map" default="eufs_track"/>
+    <arg name="x_spawn" default="54.25"/>
+    <arg name="y_spawn" default="10"/>
+    <arg name="z_spawn" default="0.1"/>
     <arg name="gui" default="false"/>
 
     <arg name="verbose" default="false"/>
