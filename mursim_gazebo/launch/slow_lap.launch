@@ -1,26 +1,51 @@
 <?xml version="1.0"?>
 <launch>
 	<arg name="node_start_delay" default="1.0"/>
+	<arg name="gui" default="false"/>
+	<arg name="map" default="eufs_track"/>
+	<arg name="perception" default="true"/>
+	<arg name="control" default="true"/>
+	<arg name="actuation" default="true"/>
+    <arg name="x_spawn" default="-13.0"/>
+    <arg name="y_spawn" default="10.3"/>
+    <arg name="z_spawn" default="0.1"/>
+	<arg name="rviz" default="true"/>
+	<arg name="rviz_file" default="$(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/>
+	<arg name='robot_name' default="19E"/>
 
-	<!--################# Perception Pipeline ###################-->
+	<!--################# World and Car ###################-->
 	<include file="$(find mursim_gazebo)/launch/spawn_world.launch">
-        <!-- <arg name="map"     value="large_track"/>
-        <arg name="x_spawn" value="16"/>
-        <arg name="y_spawn" value="32.25"/> -->
+		<arg name="robot_name" value="$(arg robot_name)"/>
+		<arg name="map" value="$(arg map)"/>
+		<arg name="gui" value="$(arg gui)"/>
     </include>
 
-	<include file="$(find lidar_dev)/launch/cluster_pipeline.launch"/>
-	<include file="$(find slam)/launch/slam.launch"/>
+    <include file="$(find mursim_description)/launch/spawn_vehicle.launch">
+        <arg name="robot_name" value="$(arg robot_name)"/>
+        <arg name="x_spawn" value="$(arg x_spawn)"/>
+        <arg name="y_spawn" value="$(arg y_spawn)"/>
+        <arg name="z_spawn" value="$(arg z_spawn)"/>
+    </include>
+
+	<!--################# Perception Pipeline ###################-->
+	<group if="$(arg perception)">
+		<include file="$(find lidar_dev)/launch/cluster_pipeline.launch"/>
+		<include file="$(find slam)/launch/slam.launch"/>
+	</group>
 
 	<!--################# Control Pipeline ###################-->
-	<!-- <include file="$(find planner_exploratory)/launch/planner.launch"/>  -->
-	<!-- <include file="$(find path_follower_ros)/launch/follower.launch"/> -->
+	<group if="$(arg control)">
+		<include file="$(find planner_exploratory)/launch/planner.launch"/>
+		<include file="$(find path_follower_ros)/launch/follower.launch"/>
+	</group>
 
 	<!--################# Actuation Pipeline ###################-->
-	<!-- <include file="$(find mursim_actuator)/launch/actuator.launch"/>	 -->
+	<group if="$(arg actuation)">
+		<include file="$(find mursim_actuator)/launch/actuator.launch"/>
+	</group>
 
 	<!--################# RVIZ ###################-->
-	<!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/> -->
-
-
+	<group if="$(arg rviz)">
+		<node type="rviz" name="rviz" pkg="rviz" args="-d $(arg rviz_file)"/>
+	</group>
 </launch>

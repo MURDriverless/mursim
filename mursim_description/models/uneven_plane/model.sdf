@@ -1,0 +1,25 @@
+<?xml version='2.0'?>
+<sdf version="1.6">
+  <model name="uneven_terrain">
+    <static>true</static>
+    <link name="uneven_terrain_link">
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+      <collision name="uneven_terrain_collision">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/uneven_terrain_2.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="uneven_terrain_visual">
+        <geometry>
+          <mesh>
+            <uri>model://meshes/uneven_terrain_2.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

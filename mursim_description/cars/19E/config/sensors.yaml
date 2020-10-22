@@ -1,0 +1,34 @@
+# All positions (pos) are with respect to chassis origin
+
+stream_track:
+  enabled: true
+  markers: "/mursim/track"
+
+sensors:
+  lidar:
+    pos:
+      x: 0.95
+      y: 0.0
+      z: 0.15
+
+  lidar_pipeline:
+    enabled: true 
+
+  stereo_pipeline:
+    enabled: false
+    camera_name: stereo_cam               # Camera name
+    image_topic_name: image_raw           # Image topic name
+
+    rate: 30                              # Publishing frequency [Hz]
+
+    camera_size: 0.05                     # Size of camera [m]
+    camera_mass: 0.1                      # Mass of camera [kg]
+    camera_height: 0.5                    # Height of camera [m]
+    camera_baseline: 0.15                 # Baseline of stereo camera [m]
+
+  gps:
+    topic_name: /piksi/gps
+    vel_topic_name: /piksi/velocity
+
+  imu:
+    topic_name: /piksi/imu
