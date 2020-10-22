@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<robot name="19E" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="dimensions" value="${load_yaml('$(find mursim_description)/cars/19E/config/dimensions.yaml')}"/>
+  <xacro:property name="car_settings" value="${load_yaml('$(find mursim_description)/cars/19E/config/car.yaml')}"/>
+  <xacro:property name="robot_sensors" value="${load_yaml('$(find mursim_description)/cars/19E/config/sensors.yaml')}"/>
+
+  <!-- Vehicle Specific Includes -->
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_chassis.xacro"/>
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_properties.xacro"/>
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_friction.gazebo"/>
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_materials.xacro"/>
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_plugins.xacro"/>
+  <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_sensors.xacro"/>
+
+  <!-- ################################################################## -->
+  <!-- ############################# Chassis ############################ -->
+  <!-- ################################################################## -->
+  <xacro:body_chassis/>
+
+  <!-- ################################################################## -->
+  <!-- #### Add the left rear wheel with its joints and tranmissions #### -->
+  <!-- ################################################################## -->
+  <xacro:body_left_rear_wheel/>
+
+  <!-- ################################################################### -->
+  <!-- #### Add the right rear wheel with its joints and tranmissions #### -->
+  <!-- ################################################################### -->
+  <xacro:body_right_rear_wheel/>
+
+  <!-- ############################################################################## -->
+  <!-- #### Add the left front wheel with its joints, steering and tranmissions  #### -->
+  <!-- ############################################################################## -->
+  <xacro:body_left_front_wheel/>
+
+  <!-- ############################################################################## -->
+  <!-- #### Add the right front wheel with its joints, steering and tranmissions #### -->
+  <!-- ############################################################################## -->
+  <xacro:body_right_front_wheel/>
+
+  <!-- ############################################################################## -->
+  <!-- ################################### Sensors ################################## -->
+  <!-- ############################################################################## -->
+
+  <xacro:if value="${robot_sensors['sensors']['lidar_pipeline']['enabled']}">
+    <!-- define joint and link for lidar -->
+    <xacro:lidar_pipeline/>
+
+    <!-- find and mount os1-64 lidar -->
+    <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro" />
+    <OS1-64 parent="front_center_lidar_link" name="os1_sensor" hz="10" samples="1024">
+      <origin xyz="0 0 0.0" rpy="0 0 0" />
+    </OS1-64>
+  </xacro:if>
+
+  <xacro:if value="${robot_sensors['sensors']['stereo_pipeline']['enabled']}">
+    <!-- define joint and link for camera -->
+    <xacro:camera_device/>
+
+    <!-- mount stereo camera -->
+    <xacro:stereo_pipeline/>
+  </xacro:if>
+
+  <!-- ################################### GPS ################################## -->
+  <xacro:gps_device/>
+  <gazebo>
+    <plugin name="gps_sensor" filename="libhector_gazebo_ros_gps.so">
+      <alwaysOn>1</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>gps_link</bodyName>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <topicName>${robot_sensors['sensors']['gps']['topic_name']}</topicName>
+      <velocityTopicName>${robot_sensors['sensors']['gps']['vel_topic_name']}</velocityTopicName>
+      <drift>5.0 5.0 5.0</drift>
+      <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <!-- ################################### IMU ################################## -->
+  <xacro:imu_device/>
+  <gazebo>
+    <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+      <robotNamespace>/</robotNamespace>
+      <updateRate>100.0</updateRate>
+      <bodyName>imu_link</bodyName>
+      <topicName>${robot_sensors['sensors']['imu']['topic_name']}</topicName>
+      <accelDrift>0.005 0.005 0.005</accelDrift>
+      <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+      <rateDrift>0.005 0.005 0.005 </rateDrift>
+      <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+      <headingDrift>0.005</headingDrift>
+      <headingGaussianNoise>0.005</headingGaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <!-- ################################### P3D ################################## -->
+  <gazebo>
+    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <frameName>map</frameName>
+      <bodyName>base_link</bodyName>
+      <topicName>odom</topicName>
+      <updateRate>30.0</updateRate>
+    </plugin>
+  </gazebo>
+
+</robot>
