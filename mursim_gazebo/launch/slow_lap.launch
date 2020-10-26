@@ -6,9 +6,9 @@
 	<arg name="perception" default="true"/>
 	<arg name="control" default="true"/>
 	<arg name="actuation" default="true"/>
-    <arg name="x_spawn" default="-13.0"/>
-    <arg name="y_spawn" default="10.3"/>
-    <arg name="z_spawn" default="0.1"/>
+	<arg name="x_spawn" default="-13.0"/>
+	<arg name="y_spawn" default="10.3"/>
+	<arg name="z_spawn" default="0.1"/>
 	<arg name="rviz" default="true"/>
 	<arg name="rviz_file" default="$(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/>
 	<arg name='robot_name' default="19E"/>

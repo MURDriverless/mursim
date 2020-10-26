@@ -8,6 +8,8 @@
 #include <gazebo/transport/transport.hh>
 #include <gazebo/common/Plugin.hh>
 
+#include "vehicle.hpp"
+
 namespace mursim
 {
     class Connection
@@ -21,6 +23,7 @@ namespace mursim
         gazebo::common::Time last_sim_time;
         std::mutex mutex;
         gazebo::transport::PublisherPtr world_control_pub_ptr;
+        VehiclePtr vehicle_ptr;
     };
 }
 #endif // MURSIM_GAZEBO_CONNECTION_HPP
