@@ -2100,7 +2100,10 @@
       <name>big_cone_211</name>
       
       <covariance x="0" y="0" xy="0"/>
-
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+      <pose>0.0 0.0 0.0 0 0 0</pose>
     </include>
 
     <static>0</static>
