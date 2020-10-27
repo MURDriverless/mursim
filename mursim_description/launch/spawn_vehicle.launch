@@ -6,12 +6,15 @@
     <arg name="x_spawn" default="0"/>
     <arg name="y_spawn" default="0"/>
     <arg name="z_spawn" default="0"/>
+    <arg name="roll_spawn"  default="0"/>
+    <arg name="pitch_spawn" default="0"/>
+    <arg name="yaw_spawn"   default="0"/>
 
     <param name="robot_description" command="$(find xacro)/xacro '$(find mursim_description)/cars/$(arg robot_name)/urdf/vehicle.xacro'"/>
 
-    <node name="spawn_urdf"
-	  pkg="gazebo_ros"
-	  type="spawn_model"
-	  args="-param robot_description -urdf -model $(arg robot_name) -x $(arg x_spawn) -y $(arg y_spawn) -z $(arg z_spawn)"/>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf 
+    -model $(arg robot_name) 
+    -x $(arg x_spawn) -y $(arg y_spawn) -z $(arg z_spawn)
+    -R $(arg roll_spawn) -P $(arg pitch_spawn) -Y $(arg yaw_spawn)"/>
 </launch>
 

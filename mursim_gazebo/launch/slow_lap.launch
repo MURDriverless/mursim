@@ -6,9 +6,12 @@
 	<arg name="perception" default="false"/>
 	<arg name="control" default="false"/>
 	<arg name="actuation" default="false"/>
-    <arg name="x_spawn" default="-13.0"/>
-    <arg name="y_spawn" default="10.3"/>
+    <arg name="x_spawn" default="62"/>
+    <arg name="y_spawn" default="11.3"/>
     <arg name="z_spawn" default="0.1"/>
+    <arg name="roll_spawn" default="0"/>
+    <arg name="pitch_spawn" default="0"/>
+    <arg name="yaw_spawn" default="3"/>
 	<arg name="rviz" default="true"/>
 	<arg name="rviz_file" default="$(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/>
 	<arg name='robot_name' default="19E"/>
@@ -25,6 +28,9 @@
         <arg name="x_spawn" value="$(arg x_spawn)"/>
         <arg name="y_spawn" value="$(arg y_spawn)"/>
         <arg name="z_spawn" value="$(arg z_spawn)"/>
+        <arg name="roll_spawn" value="$(arg roll_spawn)"/>
+        <arg name="pitch_spawn" value="$(arg pitch_spawn)"/>
+        <arg name="yaw_spawn" value="$(arg yaw_spawn)"/> 
     </include>
 
 	<!--################# Perception Pipeline ###################-->
