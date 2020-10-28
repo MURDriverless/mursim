@@ -10,6 +10,9 @@
 
 typedef std::unique_ptr<mursim::Vehicle> VehiclePtr;
 
+#define VEHICLE_GROUND_TRUTH_PUB "/mursim/vehicle_ground_truth"
+
+
 namespace mursim
 {
     class Vehicle
@@ -23,6 +26,13 @@ namespace mursim
         private:
             std::shared_ptr<ros::NodeHandle> nh;
             gazebo::physics::ModelPtr model_ptr;
+
+            // ROS Publishers
+            ros::Publisher pub_ground_truth;
+            ros::Publisher pub_car_info;
+
+            void launchPublishers(const ros::NodeHandle&);
+            void launchSubscribers(const ros::NodeHandle&);
 
     };
 }

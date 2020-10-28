@@ -16,7 +16,7 @@ namespace mursim
         data_ptr->connection_ptr.reset();
     }
 
-    void PhysicsPlugin::Load(gazebo::physics::ModelPtr model_ptr, sdf::ElementPtr sdf_ptr)
+    void PhysicsPlugin::Load(gazebo::physics::ModelPtr model_ptr, sdf::ElementPtr sdf_ptr) // Overloaded
     {
         data_ptr->model_ptr = model_ptr;
         data_ptr->world_ptr = data_ptr->model_ptr->GetWorld();
@@ -33,7 +33,7 @@ namespace mursim
         data_ptr->last_sim_time = data_ptr->world_ptr->SimTime();
     }
 
-    void PhysicsPlugin::Reset()
+    void PhysicsPlugin::Reset() // Overloaded
     {
         data_ptr->last_sim_time = 0;
     }
