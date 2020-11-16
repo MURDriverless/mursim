@@ -20,7 +20,7 @@ namespace mursim
         gazebo::physics::ModelPtr model_ptr;
         gazebo::transport::NodePtr gznode_ptr;
         gazebo::event::ConnectionPtr connection_ptr;
-        gazebo::common::Time last_sim_time;
+        gazebo::common::Time last_sim_time = 0.0;
         std::mutex mutex;
         gazebo::transport::PublisherPtr world_control_pub_ptr;
         VehiclePtr vehicle_ptr;

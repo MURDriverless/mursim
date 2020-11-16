@@ -3,7 +3,8 @@
 
 namespace mursim
 {
-    PhysicsPlugin::PhysicsPlugin() : data_ptr(new Connection)
+    PhysicsPlugin::PhysicsPlugin() 
+        : data_ptr(new Connection)
     {
         int argc = 0;
         char *argv = nullptr;
@@ -19,6 +20,9 @@ namespace mursim
     void PhysicsPlugin::Load(gazebo::physics::ModelPtr model_ptr, sdf::ElementPtr sdf_ptr) // Overloaded
     {
         data_ptr->model_ptr = model_ptr;
+
+        gzmsg << "MURSim: Attached to robot named: " << data_ptr->model_ptr->GetName() << std::endl;
+
         data_ptr->world_ptr = data_ptr->model_ptr->GetWorld();
         data_ptr->gznode_ptr = gazebo::transport::NodePtr(new gazebo::transport::Node());
         data_ptr->gznode_ptr->Init();
@@ -27,10 +31,12 @@ namespace mursim
         data_ptr->vehicle_ptr = VehiclePtr(new Vehicle(model_ptr, sdf_ptr, data_ptr->nh, data_ptr->gznode_ptr));
 
         // Bind reference to physics update function
-        gazebo::event::Events::ConnectWorldUpdateBegin(std::bind(&PhysicsPlugin::update, this));
+        data_ptr->connection_ptr = gazebo::event::Events::ConnectWorldUpdateBegin(std::bind(&PhysicsPlugin::update, this));
 
         data_ptr->world_control_pub_ptr = data_ptr->gznode_ptr->Advertise<gazebo::msgs::WorldControl>("~/world_control");
         data_ptr->last_sim_time = data_ptr->world_ptr->SimTime();
+
+        gzmsg << "MURSim: Physics plugin loaded!" << std::endl;
     }
 
     void PhysicsPlugin::Reset() // Overloaded
@@ -45,7 +51,7 @@ namespace mursim
         // PUBLISH()
 
         gazebo::common::Time current_time = data_ptr->world_ptr->SimTime();
-        double dt = 0.0;
+        double dt = (current_time - data_ptr->last_sim_time).Double();
 
         // CHECK IF LOOP TIME
 

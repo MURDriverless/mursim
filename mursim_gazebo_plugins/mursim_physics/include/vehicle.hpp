@@ -15,7 +15,7 @@
 #include <gazebo/common/Plugin.hh>
 
 #define VEHICLE_GROUND_TRUTH_TOPIC "/mursim/vehicle_ground_truth"
-#define ACTUATION_TOPIC "/mursim/vehicle_ground_truth"
+#define ACTUATION_TOPIC "/mur/control/actuation"
 
 
 namespace mursim
@@ -23,10 +23,10 @@ namespace mursim
     class Vehicle
     {
         public:
-            Vehicle(const gazebo::physics::ModelPtr&, 
-                    const sdf::ElementPtr&, 
-                    const std::shared_ptr<ros::NodeHandle>&, 
-                    const gazebo::transport::NodePtr&);
+            Vehicle(gazebo::physics::ModelPtr, 
+                    sdf::ElementPtr, 
+                    std::shared_ptr<ros::NodeHandle>, 
+                    gazebo::transport::NodePtr);
             
             void update(const double&);
 
@@ -49,6 +49,7 @@ namespace mursim
             void actuationCallback(const mur_common::actuation_msg&); 
             double input_delta = 0.0; 
             double input_acc = 0.0;
+            double f_x = 0.0;
             
             // Launch Functions
             void launchPublishers(const std::shared_ptr<ros::NodeHandle>&);
@@ -56,7 +57,11 @@ namespace mursim
             void initModel(sdf::ElementPtr&);
 
             Params params;
+
             State state;
+            State state_dot;
+            State next_state;
+            State next_state_corrected;
 
             void setPositionFromWorld();
 
@@ -71,9 +76,16 @@ namespace mursim
 
             // CALCULATION FUNCTIONS
             // Normal Forces
-            inline double getTotalNormalForce() const;
-            inline double getTotalAeroForce() const;
-            inline double getAxleNormalForce(const double&, std::string) const;
+            double getTotalNormalForce() const;
+            double getTotalAeroForce() const;
+            double getTotalDragForce() const;
+            double getAxleNormalForce(const double&, std::string) const;
+            void calcStateDot();
+            void calcFx();
+            void kinematicCorrection(const double&);
+
+            // Publishing Functions
+            void pushModelState() const;
 
     };
     typedef std::unique_ptr<Vehicle> VehiclePtr;

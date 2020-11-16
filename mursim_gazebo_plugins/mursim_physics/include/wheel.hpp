@@ -15,14 +15,19 @@ namespace mursim
     public:
         Wheel(const gazebo::physics::ModelPtr &model,
               const sdf::ElementPtr &sdf,
-              const std::string name,
+              const std::string &name,
               const gazebo::transport::NodePtr &gznode,
               const std::shared_ptr<ros::NodeHandle> &nh_ptr);
+        
+        Wheel();
 
         void calcFy(const double&);
 
         // Getters
         ignition::math::Vector3d getCentrePos() const;
+        double getSlipAngle() const;
+        double getFy() const;
+        double getWheelRadius() const;
 
         // Setters
         void setAngle(const double&);
@@ -43,7 +48,9 @@ namespace mursim
         ignition::math::Vector3d centre_pos;
 
         void calcSlipAngle();
+        void calcYFrictionCoeff();
         void getJoint();
+        void findCentrePos();
         void getCollisionRadius();
 
         std::string name;

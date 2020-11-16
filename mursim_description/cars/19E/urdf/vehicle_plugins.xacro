@@ -2,7 +2,6 @@
 <robot name="19E" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <!-- STEERING -->
-
     <transmission name="left_steering">
 	<type>transmission_interface/SimpleTransmission</type>
 	<joint name="left_steering_hinge_joint">
@@ -67,10 +66,12 @@
 	</actuator>
     </transmission>
 
+    <!--
     <gazebo>
 	<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
 	    <robotNamespace>/19E/steer_drive_controller</robotNamespace>
 	</plugin>
     </gazebo>
+    -->
 
 </robot>

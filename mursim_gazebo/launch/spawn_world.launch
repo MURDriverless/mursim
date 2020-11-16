@@ -5,7 +5,6 @@
     <arg name="robot_name" default="19E"/>
     <arg name="map" default="eufs_track"/>
     <arg name="gui" default="false"/>
-
     <arg name="verbose" default="false"/>
 
     <!-- World -->

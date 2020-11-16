@@ -17,16 +17,23 @@ namespace mursim
     {
     public:
         Axle(const gazebo::physics::ModelPtr&,
-             const sdf::ElementPtr&,
+             const sdf::ElementPtr,
              const std::string &name,
              const gazebo::transport::NodePtr&,
              const std::shared_ptr<ros::NodeHandle>&);
         
         double calcSlipAngles();
+        void calcFys(const State&, const double&);
 
         // Getters
-        double getAlpha() const;
-        double getFy(const State&, const double&);
+        double getLeftSlipAngle() const;
+        double getRightSlipAngle() const;
+        double getFz() const;
+        double getFy() const;
+        double getLeftFy() const;
+        double getRightFy() const;
+        double getWheelRadius() const;
+        
         const ignition::math::Vector3d getCentrePos() const;
 
         // Setters
