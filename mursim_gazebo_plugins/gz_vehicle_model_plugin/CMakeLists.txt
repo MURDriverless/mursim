@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(mursim_physics)
+project(gz_vehicle_model_plugins)
 
 find_package(catkin REQUIRED COMPONENTS
     roscpp
@@ -17,7 +17,7 @@ include_directories(include
 link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_library(mursim_physics SHARED
-            src/mursim_physics.cpp
+            src/model_plugin.cpp
             src/vehicle.cpp
             src/wheel.cpp
             src/axle.cpp)

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mursim_physics</name>
+  <name>mursim_vehicle_model</name>
   <version>0.0.0</version>
-  <description>The mursim_physics package</description>
+  <description>The mursim_vehicle_model package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

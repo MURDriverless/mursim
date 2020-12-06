@@ -1,23 +1,23 @@
-#include "mursim_physics.hpp"
+#include "model_plugin.hpp"
 #include "vehicle.hpp"
 
 namespace mursim
 {
-    PhysicsPlugin::PhysicsPlugin() 
+    ModelPlugin::ModelPlugin() 
         : data_ptr(new Connection)
     {
         int argc = 0;
         char *argv = nullptr;
-        ros::init(argc, &argv, "mursim_physics_plugin");
+        ros::init(argc, &argv, "mursim_model_plugin");
         data_ptr->nh = std::shared_ptr<ros::NodeHandle>(new ros::NodeHandle());
     }
 
-    PhysicsPlugin::~PhysicsPlugin()
+    ModelPlugin::~ModelPlugin()
     {
         data_ptr->connection_ptr.reset();
     }
 
-    void PhysicsPlugin::Load(gazebo::physics::ModelPtr model_ptr, sdf::ElementPtr sdf_ptr) // Overloaded
+    void ModelPlugin::Load(gazebo::physics::ModelPtr model_ptr, sdf::ElementPtr sdf_ptr) // Overloaded
     {
         data_ptr->model_ptr = model_ptr;
 
@@ -31,20 +31,20 @@ namespace mursim
         data_ptr->vehicle_ptr = VehiclePtr(new Vehicle(model_ptr, sdf_ptr, data_ptr->nh, data_ptr->gznode_ptr));
 
         // Bind reference to physics update function
-        data_ptr->connection_ptr = gazebo::event::Events::ConnectWorldUpdateBegin(std::bind(&PhysicsPlugin::update, this));
+        data_ptr->connection_ptr = gazebo::event::Events::ConnectWorldUpdateBegin(std::bind(&ModelPlugin::update, this));
 
         data_ptr->world_control_pub_ptr = data_ptr->gznode_ptr->Advertise<gazebo::msgs::WorldControl>("~/world_control");
         data_ptr->last_sim_time = data_ptr->world_ptr->SimTime();
 
-        gzmsg << "MURSim: Physics plugin loaded!" << std::endl;
+        gzmsg << "MURSim: Vehicle Model plugin loaded!" << std::endl;
     }
 
-    void PhysicsPlugin::Reset() // Overloaded
+    void ModelPlugin::Reset() // Overloaded
     {
         data_ptr->last_sim_time = 0;
     }
 
-    void PhysicsPlugin::update()
+    void ModelPlugin::update()
     {
         std::lock_guard<std::mutex> lock(data_ptr->mutex);
 
@@ -59,5 +59,5 @@ namespace mursim
         data_ptr->vehicle_ptr->update(dt);
     }
 
-    GZ_REGISTER_MODEL_PLUGIN(PhysicsPlugin)
+    GZ_REGISTER_MODEL_PLUGIN(ModelPlugin)
 }

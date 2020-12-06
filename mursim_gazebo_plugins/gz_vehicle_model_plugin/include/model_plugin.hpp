@@ -1,15 +1,15 @@
-#ifndef MURSIM_GAZEBO_MURSIM_PHYSICS_HPP
-#define MURSIM_GAZEBO_MURSIM_PHYSICS_HPP
+#ifndef MURSIM_GAZEBO_MODEL_PLUGIN_HPP
+#define MURSIM_GAZEBO_MODEL_PLUGIN_HPP
 
 #include "connection.hpp"
 
 namespace mursim
 {
-    class PhysicsPlugin : public gazebo::ModelPlugin
+    class ModelPlugin: public gazebo::ModelPlugin
     {
     public:
-        PhysicsPlugin();
-        ~PhysicsPlugin() override;
+        ModelPlugin();
+        ~ModelPlugin() override;
         void Reset() override;
         void Load(gazebo::physics::ModelPtr, sdf::ElementPtr) override;
 
@@ -21,4 +21,4 @@ namespace mursim
     };
 }
 
-#endif // MURSIM_GAZEBO_MURSIM_PHYSICS_HPP
+#endif // MURSIM_GAZEBO_MODEL_PLUGIN_HPP

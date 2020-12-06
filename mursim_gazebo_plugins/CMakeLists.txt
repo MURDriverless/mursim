@@ -22,4 +22,4 @@ catkin_package(
     INCLUDE_DIRS
 )
 
-add_subdirectory(mursim_physics)
+add_subdirectory(gz_vehicle_model_plugin)
