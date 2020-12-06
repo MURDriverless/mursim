@@ -12,7 +12,7 @@ namespace mursim
         {
             static constexpr double mass = 190.0;        // Weight of vehicle [kg] static const double GRAVITY = 9.81;        // Gravitational acceleration [m/s2]
             static constexpr double i_z = 110;           // Inertial force 
-            static constexpr double g = 9.81;
+            static constexpr double g = 9.81;		 // Gravitational acceleration (m/s2)
         };
 
         struct Kinematic

@@ -12,6 +12,7 @@ namespace mursim
                 : model_ptr(model),
                   name(model->GetName() + "::" + sdf->Get<std::string>(obj_name))
     {
+	// Calculate or find parameters
         this->getJoint();
         this->getCollisionRadius();
         this->findCentrePos();
@@ -41,10 +42,9 @@ namespace mursim
 
     void Wheel::getJoint()
     {
-        gzmsg << name << std::endl;
-        joint_ptr = model_ptr->GetJoint(name);
+        this->joint_ptr = this->model_ptr->GetJoint(name);
 
-        if (joint_ptr == nullptr)
+        if (this->joint_ptr == nullptr)
         {
             gzerr << "MURSim: Could not find " << name << " link!" << std::endl;
         }
@@ -85,18 +85,23 @@ namespace mursim
         this->alpha = alpha;
     }
 
-    inline double Wheel::getSlipAngle() const
+    double Wheel::getSlipAngle() const
     {
         return this->alpha;
     }
 
-    inline double Wheel::getFy() const
+    double Wheel::getFy() const
     {
         return this->f_y;
     }
 
-    inline double Wheel::getWheelRadius() const
+    double Wheel::getWheelRadius() const
     {
         return this->radius;
+    }
+
+    const std::string Wheel::getJointName() const
+    {
+        return this->name;
     }
 }

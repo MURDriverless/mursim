@@ -18,8 +18,7 @@ namespace mursim
                       front_axle(model, sdf, "front", gznode, nh),
                       rear_axle(model, sdf, "rear", gznode, nh)
     {
-
-        launchPublishers(nh);
+launchPublishers(nh);
         launchSubscribers(nh);
 
         // Load the model and vehicle parameters into the Vehicle model
@@ -34,8 +33,6 @@ namespace mursim
 
     void Vehicle::update(const double &dt)
     {
-        // TIRE DYNAMICS
-
         // determine the z-axis load on the vehicle
         double normal = getTotalNormalForce();
 
@@ -66,16 +63,16 @@ namespace mursim
         this->kinematicCorrection(dt);
         state = next_state_corrected;
 
-        // PUBLISH
-            // set the position, angular and linear velocity of the car in the world  (model->SetWorldPose(), 
-            //                                                                         model->SetLinearVelocity(),
-            //                                                                         model->SetAngularVelocity())
-            // publish the transform (Tf)
+        // publish
         pushModelState();
+        pushWheelOrientation();
+        pushCarInfo();
+
     }
     void Vehicle::launchPublishers(const std::shared_ptr<ros::NodeHandle> &nh) 
     {        
         pub_ground_truth = nh->advertise<mursim_common::car_state_msg>(VEHICLE_GROUND_TRUTH_TOPIC, 1);
+        pub_car_info = nh->advertise<mursim_common::car_info_msg>(VEHICLE_INFO_TOPIC, 1);
     }
 
     void Vehicle::launchSubscribers(const std::shared_ptr<ros::NodeHandle> &nh)
@@ -156,6 +153,7 @@ namespace mursim
         state_dot.r =   ((std::cos(input_delta) * front_fy * params.kinematic.front_lever +
                           std::sin(input_delta) * (front_left_fy - front_right_fy) * 0.5 * params.kinematic.cog_to_front) - 
                           rear_fy * params.kinematic.rear_lever) / params.inertia.i_z;
+
         state_dot.a_x = 0.0;
         state_dot.a_y = 0.0;
     }
@@ -192,5 +190,48 @@ namespace mursim
         model_ptr->SetWorldPose(pose);
         model_ptr->SetLinearVel(vel);
         model_ptr->SetAngularVel(vel);
+    }
+
+    void Vehicle::pushWheelOrientation() const
+    {
+        std::string l_joint_name, r_joint_name;
+        std::string l_wheel_name, r_wheel_name;
+
+        front_axle.getJointNames(l_joint_name, r_joint_name);
+
+        //l_wheel_name = model_ptr->GetJoint(l_joint_name)->GetChild()->GetName();
+        //r_wheel_name = model_ptr->GetJoint(r_joint_name)->GetChild()->GetName();
+
+    }
+
+    void Vehicle::pushCarInfo() const
+    {
+        mursim_common::car_info_msg msg;
+        const double front_wheel_fz = front_axle.getFz() / 2.0;
+        const double rear_wheel_fz = rear_axle.getFz() / 2.0;
+        const double v_abs = std::hypot(state.v_x, state.v_y);
+
+        msg.fl_wheel_fz = front_wheel_fz;
+        msg.fl_wheel_fy = front_axle.getLeftFy();
+        msg.fl_wheel_alpha = front_axle.getLeftSlipAngle();
+
+        msg.fr_wheel_fz = front_wheel_fz;
+        msg.fr_wheel_fy = front_axle.getRightFy();
+        msg.fr_wheel_alpha = front_axle.getRightSlipAngle();
+
+        msg.rl_wheel_fz = rear_wheel_fz;
+        msg.rl_wheel_fy = rear_axle.getLeftFy();
+        msg.rl_wheel_alpha = rear_axle.getLeftSlipAngle();
+
+        msg.rr_wheel_fz = rear_wheel_fz;
+        msg.rr_wheel_fy = rear_axle.getRightFy();
+        msg.rr_wheel_alpha = rear_axle.getRightSlipAngle();
+
+        msg.fx = this->f_x;
+        msg.velocity = std::hypot(state.v_x, state.v_y);
+
+        msg.header.stamp = ros::Time::now();
+
+        pub_car_info.publish(msg);
     }
 }

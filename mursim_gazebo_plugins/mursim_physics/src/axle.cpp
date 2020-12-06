@@ -34,10 +34,10 @@ namespace mursim
 
     void Axle::calcFys(const State &state, const double &delta)
     {
-        l_wheel.setSlipAngle(calcSlipAngle(state, delta));
-        r_wheel.setSlipAngle(calcSlipAngle(state, delta));
-        l_wheel.calcFy(f_z);
-        r_wheel.calcFy(f_z);
+        l_wheel.setSlipAngle(calcSlipAngle(state, delta, name));
+        r_wheel.setSlipAngle(calcSlipAngle(state, delta, name));
+        l_wheel.calcFy(f_z / 2.0);
+        r_wheel.calcFy(f_z / 2.0);
         this->f_y = l_wheel.getFy() + r_wheel.getFy();
     }
 
@@ -46,11 +46,38 @@ namespace mursim
         this->f_z = fz;
     }
 
-    inline double Axle::calcSlipAngle(const State &state, const double &delta)
+    inline double Axle::calcSlipAngle(const State &state, const double &delta, const std::string &position)
     {
         double v_x = std::max(1.0, state.v_x);
-        double alpha = std::atan((state.v_y + axle_factor * params.cog_to_front * state.r) /
-                                 (v_x - 0.5 * axle_width * state.r)) - delta;
+        double alpha;
+
+        if (position == "left")
+        {
+	    if (name == "front")
+	    {
+                alpha = std::atan((state.v_y + params.cog_to_front * state.r) /
+                           (v_x - 0.5 * axle_width * state.r)) - delta;
+	    }
+	    else
+	    {
+                alpha = std::atan((state.v_y - params.cog_to_rear * state.r) /
+                          (v_x - 0.5 * axle_width * state.r));
+	    }
+
+        }
+        else 
+        {
+	    if (name == "front")
+	    {
+                alpha = std::atan((state.v_y + params.cog_to_front * state.r) /
+                          (v_x + 0.5 * axle_width * state.r)) - delta;
+	    }
+	    else 
+	    {
+                alpha = std::atan((state.v_y - params.cog_to_rear * state.r) /
+                          (v_x + 0.5 * axle_width * state.r));
+	    }
+        }
             
         return alpha; 
     }
@@ -88,5 +115,11 @@ namespace mursim
      double Axle::getWheelRadius() const
      {
          return l_wheel.getWheelRadius();
+     }
+
+     void Axle::getJointNames(std::string &left, std::string &right) const
+     {
+        left = l_wheel.getJointName();
+        right = r_wheel.getJointName();
      }
 }

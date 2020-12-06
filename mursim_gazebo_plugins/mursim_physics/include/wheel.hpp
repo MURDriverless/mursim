@@ -28,6 +28,7 @@ namespace mursim
         double getSlipAngle() const;
         double getFy() const;
         double getWheelRadius() const;
+        const std::string getJointName() const;
 
         // Setters
         void setAngle(const double&);

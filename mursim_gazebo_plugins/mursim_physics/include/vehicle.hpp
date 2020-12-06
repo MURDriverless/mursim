@@ -2,6 +2,7 @@
 #define MURSIM_GAZEBO_VEHICLE_HPP
 
 #include "mursim_common/car_state_msg.h"
+#include "mursim_common/car_info_msg.h"
 #include "mur_common/actuation_msg.h"
 
 #include "params.hpp"
@@ -15,6 +16,7 @@
 #include <gazebo/common/Plugin.hh>
 
 #define VEHICLE_GROUND_TRUTH_TOPIC "/mursim/vehicle_ground_truth"
+#define VEHICLE_INFO_TOPIC "/mursim/car_info"
 #define ACTUATION_TOPIC "/mur/control/actuation"
 
 
@@ -86,10 +88,12 @@ namespace mursim
 
             // Publishing Functions
             void pushModelState() const;
+            void pushWheelOrientation() const;
+            void pushCarInfo() const;
 
     };
-    typedef std::unique_ptr<Vehicle> VehiclePtr;
 
+    typedef std::unique_ptr<Vehicle> VehiclePtr;
 }
 
 #endif // MURSIM_GAZEBO_VEHICLE_HPP

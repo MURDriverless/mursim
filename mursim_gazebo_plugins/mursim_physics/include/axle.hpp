@@ -11,6 +11,7 @@
 #include "params.hpp"
 #include "state.hpp"
 
+
 namespace mursim
 {
     class Axle
@@ -33,6 +34,7 @@ namespace mursim
         double getLeftFy() const;
         double getRightFy() const;
         double getWheelRadius() const;
+        void getJointNames(std::string&, std::string&) const;
         
         const ignition::math::Vector3d getCentrePos() const;
 
@@ -55,7 +57,7 @@ namespace mursim
         ignition::math::Vector3d axle_centre_pos;
         Params::Kinematic params;
 
-        inline double calcSlipAngle(const State&, const double&);
+        inline double calcSlipAngle(const State&, const double&, const std::string&);
 
         double axle_width; 
         double car_length; // DEPRECATED in Params

@@ -10,7 +10,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(DIRECTORY msg
     FILES
-    car_state_msg.msg)
+    car_state_msg.msg
+    car_info_msg.msg)
 
 generate_messages(
     DEPENDENCIES

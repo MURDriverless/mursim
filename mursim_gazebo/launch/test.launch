@@ -3,9 +3,10 @@
 	<arg name="node_start_delay" default="1.0"/>
 	<arg name="gui" default="false"/>
 	<arg name="map" default="eufs_track"/>
-	<arg name="perception" default="true"/>
-	<arg name="control" default="true"/>
-	<arg name="actuation" default="false"/>
+
+	<arg name="perception" default="false"/>
+	<arg name="control" default="false"/>
+
 	<arg name="x_spawn" default="-13.0"/>
 	<arg name="y_spawn" default="10.3"/>
 	<arg name="z_spawn" default="0.1"/>
@@ -39,11 +40,6 @@
 	<group if="$(arg control)">
 		<include file="$(find planner_exploratory)/launch/planner.launch"/>
 		<include file="$(find path_follower_ros)/launch/follower.launch"/>
-	</group>
-
-	<!--################# Actuation Pipeline ###################-->
-	<group if="$(arg actuation)">
-		<include file="$(find mursim_actuator)/launch/actuator.launch"/>
 	</group>
 
 	<!--################# RVIZ ###################-->
