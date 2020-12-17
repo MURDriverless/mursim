@@ -4,17 +4,16 @@ stream_track:
   enabled: true
   markers: "/mursim/track"
 
-ground_truth:
-  enabled: true
-
 sensors:
+  lidar:
+    pos:
+      x: 0.95
+      y: 0.0
+      z: 0.15
+
   lidar_pipeline:
     enabled: true 
-    pos:
-        x: 0.95
-        y: 0.0
-        z: 0.15
-       
+
   stereo_pipeline:
     enabled: false
     camera_name: stereo_cam               # Camera name
@@ -30,14 +29,6 @@ sensors:
   gps:
     topic_name: /piksi/gps
     vel_topic_name: /piksi/velocity
-    pos:
-        x: 0.0
-        y: 0.0
-        z: 0.0
 
   imu:
     topic_name: /piksi/imu
-    pos:
-        x: 0.0
-        y: 0.0
-        z: 0.0
