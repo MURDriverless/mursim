@@ -10,8 +10,7 @@
     <param name="robot_description" command="$(find xacro)/xacro '$(find mursim_description)/cars/$(arg robot_name)/urdf/vehicle.xacro'"/>
 
     <node name="spawn_urdf"
-	  pkg="gazebo_ros"
-	  type="spawn_model"
-	  args="-param robot_description -urdf -model $(arg robot_name) -x $(arg x_spawn) -y $(arg y_spawn) -z $(arg z_spawn)"/>
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-param robot_description -urdf -model $(arg robot_name) -x $(arg x_spawn) -y $(arg y_spawn) -z $(arg z_spawn)"/>
 </launch>
-

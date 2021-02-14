@@ -59,10 +59,10 @@
         </geometry>
       </visual>
       <collision>
-        <geometry>
          <origin xyz="${sensors['gps_pipeline']['pos']['x']} 
                      ${sensors['gps_pipeline']['pos']['y']} 
                      ${sensors['gps_pipeline']['pos']['z']}" rpy="0 0 0"/>
+        <geometry>
           <box size=".1 .1 .1"/>
         </geometry>
       </collision>

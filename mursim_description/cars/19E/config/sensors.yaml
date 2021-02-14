@@ -27,15 +27,17 @@ sensors:
     camera_height: 0.5                    # Height of camera [m]
     camera_baseline: 0.15                 # Baseline of stereo camera [m]
 
-  gps:
+  gps_pipeline:
+    enabled: true
     topic_name: /piksi/gps
     vel_topic_name: /piksi/velocity
     pos:
         x: 0.0
-        y: 0.0
+        y: 0.1
         z: 0.0
 
-  imu:
+  imu_pipeline:
+    enabled: true
     topic_name: /piksi/imu
     pos:
         x: 0.0
