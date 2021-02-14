@@ -32,6 +32,7 @@
 
   <xacro:if value="${robot_sensors['sensors']['lidar_pipeline']['enabled']}">
     <xacro:lidar_pipeline/>
+  </xacro:if>
 
   <xacro:if value="${robot_sensors['sensors']['stereo_pipeline']['enabled']}">
     <!-- define joint and link for camera -->

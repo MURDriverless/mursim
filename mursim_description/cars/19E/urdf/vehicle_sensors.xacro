@@ -6,7 +6,7 @@
 
     <!-- ############################ LIDAR ############################# -->
     <!-- find and mount os1-64 lidar -->
-    <xacro:macro name="lidar">
+    <xacro:macro name="lidar_pipeline">
         <!-- <gazebo>
             <plugin name="lidar_pipeline" filename="libgazebo_cone_sensor.so">
                 <yaml_config>$(arg sensors_config_file)</yaml_config>
@@ -98,14 +98,15 @@
     <!-- ############################ GPS ############################# -->
 
     <xacro:macro name="gps_pipeline">
+        <xacro:gps_device/>
         <gazebo>
           <plugin name="gps_sensor" filename="libhector_gazebo_ros_gps.so">
             <alwaysOn>1</alwaysOn>
             <updateRate>10.0</updateRate>
             <bodyName>gps_link</bodyName>
             <robotBaseFrame>base_link</robotBaseFrame>
-            <topicName>${robot_sensors['sensors']['gps']['topic_name']}</topicName>
-            <velocityTopicName>${robot_sensors['sensors']['gps']['vel_topic_name']}</velocityTopicName>
+            <topicName>${robot_sensors['sensors']['gps_pipeline']['topic_name']}</topicName>
+            <velocityTopicName>${robot_sensors['sensors']['gps_pipeline']['vel_topic_name']}</velocityTopicName>
             <drift>5.0 5.0 5.0</drift>
             <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
             <velocityDrift>0 0 0</velocityDrift>
@@ -116,12 +117,13 @@
 
     <!-- ############################ IMU ############################# -->
     <xacro:macro name="imu_pipeline">
+        <xacro:imu_device/>
         <gazebo>
           <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
             <robotNamespace>/</robotNamespace>
             <updateRate>100.0</updateRate>
             <bodyName>imu_link</bodyName>
-            <topicName>${robot_sensors['sensors']['imu']['topic_name']}</topicName>
+            <topicName>${robot_sensors['sensors']['imu_pipeline']['topic_name']}</topicName>
             <accelDrift>0.005 0.005 0.005</accelDrift>
             <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
             <rateDrift>0.005 0.005 0.005 </rateDrift>
@@ -143,4 +145,5 @@
           </plugin>
         </gazebo>
     </xacro:macro>
+
 </robot>
