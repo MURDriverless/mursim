@@ -2,12 +2,11 @@
 <package format="2">
   <name>mursim_gazebo_plugins</name>
   <license>MIT</license>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
   <maintainer email="leong.joseph@me.com">Joseph Leong</maintainer>
-  <description>The mursim_gazebo_plugins package</description>
+  <description>MURSim Gazebo - Plugins</description>
 
   <buildtool_depend>catkin</buildtool_depend>
-
   <build_depend>mursim_common</build_depend>
   <build_depend>roscpp</build_depend>
 
