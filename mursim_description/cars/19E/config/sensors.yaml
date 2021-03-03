@@ -9,6 +9,7 @@ ground_truth:
 
 sensors:
   lidar_pipeline:
+    node_name: 
     enabled: true 
     pos:
         x: 0.95

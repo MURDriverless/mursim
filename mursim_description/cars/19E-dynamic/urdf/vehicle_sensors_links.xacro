@@ -2,8 +2,14 @@
 <robot name="19E"
   xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="gps_device">
+  <xacro:macro name="lidar_device">
+      <link name="front_center_lidar_link">
+          <inertial>
+              <mass value="1"/>
+              <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+  </xacro:macro>
 
+  <xacro:macro name="gps_device">
     <joint name="gps_joint" type="fixed">
       <!-- <axis xyz="1 0 0"/> -->
       <!-- 0 1 0 -->

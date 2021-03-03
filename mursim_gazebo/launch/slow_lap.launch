@@ -18,13 +18,11 @@
 
 	<!--################# World and Car ###################-->
 
-  <group if="$(eval arg('map') == 'eufs_track')">
-    <include file="$(find mursim_gazebo)/launch/eufs_track.launch">
-      <arg name="robot_name" value="$(arg robot_name)"/>
-      <arg name="map" value="$(arg map)"/>
-      <arg name="gui" value="$(arg gui)"/>
-    </include>
-  </group>
+  <include file="$(find mursim_gazebo)/launch/eufs_track.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="map" value="$(arg map)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
 
 	<!--################# Perception Pipeline ###################-->
 

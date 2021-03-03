@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mursim_gazebo_description</name>
+  <name>mursim_description</name>
   <version>1.0.0</version> <description>MURSim Gazebo - Description</description>
   <maintainer email="leong.joseph@me.com">leongjoseph</maintainer>
   <license>MIT</license>

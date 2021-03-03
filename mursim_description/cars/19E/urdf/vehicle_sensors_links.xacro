@@ -3,24 +3,19 @@
   xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- ######################## LIDAR LINKS ########################## -->
-  <xacro:macro name="lidar_pipeline">
+  <xacro:macro name="lidar_device">
       <link name="front_center_lidar_link">
           <inertial>
               <mass value="1"/>
               <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
           </inertial>
       </link>
+
       <joint name="front_center_lidar_joint" type="fixed">
           <parent link="chassis"/>
           <child link="front_center_lidar_link"/>
           <origin xyz="${sensors['lidar_pipeline']['pos']['x']} 0.0 ${sensors['lidar_pipeline']['pos']['z']}" rpy="0 0 0"/>
       </joint>
-
-      <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro" />
-      <OS1-64 parent="front_center_lidar_link" name="os1_sensor" hz="10" samples="1024">
-        <origin xyz="0 0 0.0" rpy="0 0 0" />
-      </OS1-64>
-
   </xacro:macro>
 
   <!-- ######################## GPS LINKS ########################## -->
