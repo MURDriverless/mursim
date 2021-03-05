@@ -1,24 +1,13 @@
 <?xml version="1.0"?>
-<robot name="19E"
-    xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="19E" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:include filename="$(find mursim_description)/cars/19E/urdf/vehicle_sensors_links.xacro"/>
-
     <xacro:property name="sensors" value="${robot_sensors['sensors']}"/>
 
+    <!-- ############################ LIDAR ############################# -->
+    <!-- find and mount os1-64 lidar -->
     <xacro:macro name="lidar_pipeline">
-        <!-- Sensor links and fixed joints -->
-        <link name="front_center_lidar_link">
-            <inertial>
-                <mass value="1"/>
-                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-            </inertial>
-        </link>
-        <joint name="front_center_lidar_joint" type="fixed">
-            <parent link="chassis"/>
-            <child link="front_center_lidar_link"/>
-            <origin xyz="${sensors['lidar']['pos']['x']} 0.0 ${sensors['lidar']['pos']['z']}" rpy="0 0 0"/>
-        </joint>
+        <xacro:lidar_device/>
 
         <!-- <gazebo>
             <plugin name="lidar_pipeline" filename="libgazebo_cone_sensor.so">
@@ -27,7 +16,14 @@
                 <node_name>${sensors['lidar_pipeline']['node_name']}</node_name>
             </plugin>
         </gazebo> -->
+
+        <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro" />
+        <OS1-64 parent="front_center_lidar_link" name="os1_sensor" hz="10" samples="1024">
+            <origin xyz="0 0 0.0" rpy="0 0 0" />
+        </OS1-64>
     </xacro:macro>
+
+    <!-- ############################ CAMERAS ############################# -->
 
     <xacro:macro name="camera_pipeline">
         <!-- <gazebo>
@@ -40,7 +36,6 @@
     </xacro:macro>
 
     <xacro:macro name="stereo_pipeline">
-
         <!-- Stereo Camera -->
         <gazebo reference="left_camera_frame">
 
@@ -106,4 +101,56 @@
             </sensor>
         </gazebo>
     </xacro:macro>
+
+    <!-- ############################ GPS ############################# -->
+
+    <xacro:macro name="gps_pipeline">
+        <xacro:gps_device/>
+        <gazebo>
+          <plugin name="gps_sensor" filename="libhector_gazebo_ros_gps.so">
+            <alwaysOn>1</alwaysOn>
+            <updateRate>10.0</updateRate>
+            <bodyName>gps_link</bodyName>
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <topicName>${robot_sensors['sensors']['gps_pipeline']['topic_name']}</topicName>
+            <velocityTopicName>${robot_sensors['sensors']['gps_pipeline']['vel_topic_name']}</velocityTopicName>
+            <drift>5.0 5.0 5.0</drift>
+            <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+            <velocityDrift>0 0 0</velocityDrift>
+            <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+          </plugin>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- ############################ IMU ############################# -->
+    <xacro:macro name="imu_pipeline">
+        <xacro:imu_device/>
+        <gazebo>
+          <plugin name="imu_controller" filename="libhector_gazebo_ros_imu.so">
+            <robotNamespace>/</robotNamespace>
+            <updateRate>100.0</updateRate>
+            <bodyName>imu_link</bodyName>
+            <topicName>${robot_sensors['sensors']['imu_pipeline']['topic_name']}</topicName>
+            <accelDrift>0.005 0.005 0.005</accelDrift>
+            <accelGaussianNoise>0.005 0.005 0.005</accelGaussianNoise>
+            <rateDrift>0.005 0.005 0.005 </rateDrift>
+            <rateGaussianNoise>0.005 0.005 0.005 </rateGaussianNoise>
+            <headingDrift>0.005</headingDrift>
+            <headingGaussianNoise>0.005</headingGaussianNoise>
+          </plugin>
+        </gazebo>
+    </xacro:macro>
+
+    <!-- ####################### GROUND TRUTH #########################-->
+    <xacro:macro name="p3d_ground_truth">
+        <gazebo>
+          <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+            <frameName>map</frameName>
+            <bodyName>base_link</bodyName>
+            <topicName>odom</topicName>
+            <updateRate>30.0</updateRate>
+          </plugin>
+        </gazebo>
+    </xacro:macro>
+
 </robot>
