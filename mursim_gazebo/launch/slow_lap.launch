@@ -13,7 +13,7 @@
 	<arg name="control" default="true"/>
 	<arg name="actuation" default="true"/>
 	<arg name="rviz" default="true"/>
-	<arg name="rviz_file" default="$(find mursim_gazebo_plugins)/rviz/rviz_config.rviz"/>
+	<arg name="rviz_file" default="$(find mursim_common)/rviz/rviz_config.rviz"/>
 	<arg name='robot_name' default="19E"/>
 
 	<!--################# World and Car ###################-->
