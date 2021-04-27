@@ -51,7 +51,7 @@ sudo apt install ros-melodic-position-controllers
 
 4. Start gazebo: Run the 'src/mursim_gazebo/launch/slow_lap.launch' file with roslaunch
     ```bash
-    roslaunch mursim_gazebo spawn_world.launch
+    roslaunch mursim_gazebo slow_lap.launch
     ```
 5. Start the autonomous pipeline:   
     In a seperate terminal, navigate to your mursim workspace
