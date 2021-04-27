@@ -19,6 +19,12 @@ Install `tf2_sensor_msgs` and `glog` (Google logging module)
 ```
 sudo apt install ros-melodic-tf2-sensor-msgs libgoogle-glog-dev
 ```
+Install package for effort controller and position controllers
+
+```
+sudo apt install ros-melodic-effort-controllers
+sudo apt install ros-melodic-position-controllers
+```
 
 
 
@@ -33,7 +39,7 @@ sudo apt install ros-melodic-tf2-sensor-msgs libgoogle-glog-dev
     ```
 
 2. Clone the repository (current working version)
-   Run `mur_init.sh` found here:https://github.com/MURDriverless/mursim_init/blob/dev/Andrew_working/mur_init/mur_init.sh within the `/src` of your ros/catkin workspace IMPORTANT, current branch is dev/Andrew_working
+   Run `mur_init.sh` found here:https://github.com/MURDriverless/mursim_init/tree/master/mur_init within the `/src` of your ros/catkin workspace IMPORTANT, current branch is "main"
 
 
 3. Build the package with Catkin and source environment
