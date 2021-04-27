@@ -39,7 +39,7 @@ sudo apt install ros-melodic-position-controllers
     ```
 
 2. Clone the repository (current working version)
-   Run `mur_init.sh` found here:https://github.com/MURDriverless/mursim_init/tree/master/mur_init within the `/src` of your ros/catkin workspace IMPORTANT, current branch is "main"
+   Run `mur_init.sh` found here:https://github.com/MURDriverless/mursim_init/tree/master/mur_init within the `/src` of your ros/catkin workspace IMPORTANT, current branch is "master"
 
 
 3. Build the package with Catkin and source environment
